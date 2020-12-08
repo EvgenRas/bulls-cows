@@ -51,36 +51,51 @@ int testCow(const string &userNum, const string &conceivedNum)
     }
     return cow;
 }
+bool isNum (const string &userNumber)
+{
+    for(size_t i = 0; i < userNumber.length(); ++i)
+    {
+        if(static_cast<int>(userNumber[i]) < 48 || static_cast<int>(userNumber[i]) > 57)
+        {
+            return false;
+            break;
+        }
+    }
+    return true;
+}
 int main()
 {
     string conceivedNumber = getRandomNum();
     string userNumber;
-    int count = 0;
+    int count = 1;
     do
     {
-        ++count;
         cout << "Try No. " << count << ". Enter a 4-digit number. To quit the game, enter 0." << endl;
         cin >> userNumber;
-        if(userNumber == "0")
+        if(isNum(userNumber) && userNumber.length() == 4)
         {
-            cout << "You are out of the game, we will be glad to see you again." << endl;
-            break;
-        }
-        if(userNumber.length() != 4)
-            continue;
-        int bulls = testBull(userNumber, conceivedNumber);
-        int cows = testCow(userNumber, conceivedNumber);
-        if (bulls == 4)
-        {
-            cout << "Congratulations! You guessed the number!" << endl;
-            cout << "Attempts = " <<  count << endl;
-            break;
+            ++count;
+            if(userNumber == "0")
+            {
+                cout << "You are out of the game, we will be glad to see you again." << endl;
+                break;
+            }
+            int bulls = testBull(userNumber, conceivedNumber);
+            int cows = testCow(userNumber, conceivedNumber);
+            if (bulls == 4)
+            {
+                cout << "Congratulations! You guessed the number!" << endl;
+                cout << "Attempts = " <<  count << endl;
+                break;
+            }
+            else
+            {
+                cout << "bulls = " <<  bulls << endl;
+                cout << "cows = " <<  cows << endl;
+            }
         }
         else
-        {
-            cout << "bulls = " <<  bulls << endl;
-            cout << "cows = " <<  cows << endl;
-        }
+            cout << "Input Error." << endl;
     } while (1);
     return 0;
 }
