@@ -72,14 +72,14 @@ int main()
     {
         cout << "Try No. " << count << ". Enter a 4-digit number. To quit the game, enter 0." << endl;
         cin >> userNumber;
-        if(isNum(userNumber) && userNumber.length() == 4)
+        if(userNumber == "0")
+        {
+            cout << "You are out of the game, we will be glad to see you again." << endl;
+            break;
+        }
+        else if(isNum(userNumber) && userNumber.length() == 4)
         {
             ++count;
-            if(userNumber == "0")
-            {
-                cout << "You are out of the game, we will be glad to see you again." << endl;
-                break;
-            }
             int bulls = testBull(userNumber, conceivedNumber);
             int cows = testCow(userNumber, conceivedNumber);
             if (bulls == 4)
